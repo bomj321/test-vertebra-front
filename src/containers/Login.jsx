@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout, Row, Col } from 'antd';
 
 import 'antd/dist/antd.css';
-import '../styles/components/Login.css';
+import '../styles/containers/Login.css';
 
 import FormLogin from '../components/FormLogin';
 

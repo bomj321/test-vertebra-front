@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import axiosconf from '../axios';
+
 import Template from '../components/Template';
 
 import Login from '../containers/Login';
@@ -8,6 +10,8 @@ import Location from '../containers/Location';
 import Episode from '../containers/Episode';
 
 const App = () => {
+  axiosconf();
+
   return (
     <BrowserRouter>
       <Switch>
