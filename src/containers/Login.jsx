@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Layout, Row, Col } from 'antd';
 
 import 'antd/dist/antd.css';

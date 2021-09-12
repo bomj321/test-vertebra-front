@@ -3,19 +3,14 @@ import { Card } from 'antd';
 
 const { Meta } = Card;
 
-const CharacterCard = () => {
+const CharacterCard = ({ item }) => {
   return (
     <Card
       hoverable
       style={{ width: 240 }}
-      cover={
-        <img
-          alt="example"
-          src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-        />
-      }
+      cover={<img alt="character" src={item.image} />}
     >
-      <Meta title="Europe Street beat" description="www.instagram.com" />
+      <Meta title={item.name} description={item.gender} />
     </Card>
   );
 };
