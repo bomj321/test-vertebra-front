@@ -9,21 +9,36 @@ import Character from '../containers/Character';
 import Location from '../containers/Location';
 import Episode from '../containers/Episode';
 
+import useToken from '../hooks/useToken';
+
 const App = () => {
   axiosconf();
+  const { token, setToken } = useToken();
 
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <Template>
-          <Route exact path="/characters" component={Character} />
-          <Route exact path="/locations" component={Location} />
-          <Route exact path="/episodes" component={Episode} />
-        </Template>
-      </Switch>
-    </BrowserRouter>
-  );
+  if (!token) {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" render={() => <Login setToken={setToken} />} />
+        </Switch>
+      </BrowserRouter>
+    );
+  }
+
+  if (token) {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" render={() => <Login setToken={setToken} />} />
+          <Template>
+            <Route exact path="/characters" component={Character} />
+            <Route exact path="/locations" component={Location} />
+            <Route exact path="/episodes" component={Episode} />
+          </Template>
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 };
 
 export default App;

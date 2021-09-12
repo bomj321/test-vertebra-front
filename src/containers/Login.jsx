@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout, Row, Col } from 'antd';
 
 import 'antd/dist/antd.css';
@@ -8,7 +8,7 @@ import FormLogin from '../components/FormLogin';
 
 const { Header, Footer, Content } = Layout;
 
-const Login = () => {
+const Login = ({ setToken }) => {
   return (
     <Layout>
       <Header>Header</Header>
@@ -20,7 +20,7 @@ const Login = () => {
             md={{ span: 8, offset: 7 }}
             lg={{ span: 8, offset: 7 }}
           >
-            <FormLogin />
+            <FormLogin setToken={setToken} />
           </Col>
         </Row>
       </Content>

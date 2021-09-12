@@ -10,14 +10,24 @@ import { Link } from 'react-router-dom';
 
 import '../styles/components/Template.css';
 
-const { Header, Content } = Layout;
+const { Header, Footer, Content } = Layout;
+
+const logout = () => {
+  localStorage.clear();
+  window.location = '/';
+};
 
 const Template = ({ children }) => {
   return (
     <Layout>
       <Header className="header">
         <div className="logo" />
-        <Menu theme="dark" mode="horizontal" className="header-menu-template">
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          className="header-menu-template"
+          defaultSelectedKeys={['1']}
+        >
           <Menu.Item key="1" icon={<UserOutlined />}>
             <Link to="/characters">Personajes</Link>
           </Menu.Item>
@@ -29,7 +39,7 @@ const Template = ({ children }) => {
             <Link to="/episodes">Episodios</Link>
           </Menu.Item>
 
-          <Menu.Item key="4" icon={<LogoutOutlined />}>
+          <Menu.Item key="4" icon={<LogoutOutlined />} onClick={() => logout()}>
             Salir
           </Menu.Item>
         </Menu>
@@ -47,6 +57,9 @@ const Template = ({ children }) => {
           >
             {children}
           </Content>
+          <Footer style={{ textAlign: 'center' }}>
+            Test Vertebra @2021 Created by José ortega
+          </Footer>
         </Layout>
       </Layout>
     </Layout>
