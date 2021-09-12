@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table } from 'antd';
-import { DeleteOutlined, AreaChartOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
+import EpisodeDialog from './dialogs/EpisodeDialog';
 
 const TableEpisode = () => {
   const dataSource = [
@@ -25,11 +26,14 @@ const TableEpisode = () => {
       title: 'Acciones',
       dataIndex: '',
       key: 'x',
-      render: () => {
+      render: (data) => {
         return (
           <>
-            <DeleteOutlined />
-            <AreaChartOutlined />
+            <DeleteOutlined
+              className="mr-1"
+              onClick={() => console.log(data)}
+            />
+            <EpisodeDialog type="edit" />
           </>
         );
       },
@@ -41,12 +45,16 @@ const TableEpisode = () => {
   };
 
   return (
-    <Table
-      dataSource={dataSource}
-      columns={columns}
-      onChange={onChange}
-      pagination={{ pageSize: 5 }}
-    />
+    <>
+      <EpisodeDialog />
+      <Table
+        className="mt-1"
+        dataSource={dataSource}
+        columns={columns}
+        onChange={onChange}
+        pagination={{ pageSize: 5 }}
+      />
+    </>
   );
 };
 
