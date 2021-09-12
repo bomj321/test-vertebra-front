@@ -57,29 +57,38 @@ const EpisodeDialog = ({
     if (type === 'edit') {
       EpisodeService.editEpisode(values, idEpisode)
         .then(async () => {
-          toastr.success('Personaje editado con éxito.');
+          toastr.success('Episodio editado con éxito.');
           setLoading(false);
           handleCancel();
         })
         .catch((error) => {
-          console.log(error);
-          toastr.error('Ha ocurrido un error al intentar editar el personaje.');
+          if (error.response && error.response.status === 409) {
+            toastr.error('El nombre debe ser único');
+          } else {
+            toastr.error(
+              'Ha ocurrido un error al intentar editar el episodio.'
+            );
+          }
           setLoading(false);
         });
     } else {
       EpisodeService.saveEpisode(values)
         .then(async () => {
-          toastr.success('Personajes guardado con éxito.');
+          toastr.success('Episodio guardado con éxito.');
 
           setLoading(false);
           handleCancel();
           getEpisodes();
         })
         .catch((error) => {
-          console.log(error);
-          toastr.error(
-            'Ha ocurrido un error al intentar guardar el personaje.'
-          );
+          if (error.response && error.response.status === 409) {
+            toastr.error('El nombre debe ser único');
+          } else {
+            toastr.error(
+              'Ha ocurrido un error al intentar guardar el episodio.'
+            );
+          }
+
           setLoading(false);
         });
     }
@@ -122,8 +131,8 @@ const EpisodeDialog = ({
             name="register"
             initialValues={{
               name: episode ? episode.name : '',
-              locationId: episode ? episode.location.id : '',
-              charactersIds: episode ? getCharactersId(episode.characters) : '',
+              locationId: episode ? episode.location.id : null,
+              charactersIds: episode ? getCharactersId(episode.characters) : [],
             }}
             scrollToFirstError
           >

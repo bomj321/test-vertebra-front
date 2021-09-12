@@ -12,6 +12,8 @@ import EpisodeService from '../services/EpisodeService';
 import LocationService from '../services/LocationService';
 import CharacterService from '../services/CharacterService';
 
+const { Column, ColumnGroup } = Table;
+
 const TableEpisode = () => {
   const [loading, setLoading] = useState(false);
   const [totalItems, setTotalItems] = useState();
@@ -20,33 +22,6 @@ const TableEpisode = () => {
   const [items, setItems] = useState([]);
   const [itemsCharacters, setItemsCharacters] = useState([]);
   const [dataSource, setDataSource] = useState([]);
-  const [columns] = useState([
-    {
-      title: 'Nombre',
-      dataIndex: 'name',
-    },
-    {
-      title: 'Acciones',
-      dataIndex: '',
-      key: 'x',
-      render: (data) => {
-        return (
-          <>
-            <DeleteOutlined
-              className="mr-1"
-              onClick={() => deleteEpisode(data.id)}
-            />
-            <EpisodeDialog
-              type="edit"
-              idEpisode={data.id}
-              items={items}
-              itemsCharacters={itemsCharacters}
-            />
-          </>
-        );
-      },
-    },
-  ]);
 
   const getEpisodes = (pageNumber = 1, pageSizeNumber = 10) => {
     setLoading(true);
@@ -81,6 +56,8 @@ const TableEpisode = () => {
     setLoading(true);
     EpisodeService.deleteEpisode(id)
       .then(() => {
+        toastr.success('Episodio eliminado con éxito.');
+
         if (dataSource.length - 1 === 0) {
           getEpisodes(page - 1 === 0 ? 1 : page);
           setPage(page - 1 === 0 ? 1 : page);
@@ -142,10 +119,31 @@ const TableEpisode = () => {
         <Table
           className="mt-1"
           dataSource={dataSource}
-          columns={columns}
           onChange={getPaginatedRows}
           pagination={{ pageSize, total: totalItems, defaultCurrent: page }}
-        />
+        >
+          <Column title="Nombre" dataIndex="name" key="name" />
+          <Column
+            title="Acciones"
+            key="actions"
+            render={(data) => {
+              return (
+                <>
+                  <DeleteOutlined
+                    className="mr-1"
+                    onClick={() => deleteEpisode(data.id)}
+                  />
+                  <EpisodeDialog
+                    type="edit"
+                    idEpisode={data.id}
+                    items={items}
+                    itemsCharacters={itemsCharacters}
+                  />
+                </>
+              );
+            }}
+          />
+        </Table>
       )}
     </>
   );
