@@ -12,7 +12,7 @@ import EpisodeService from '../services/EpisodeService';
 import LocationService from '../services/LocationService';
 import CharacterService from '../services/CharacterService';
 
-const { Column, ColumnGroup } = Table;
+const { Column } = Table;
 
 const TableEpisode = () => {
   const [loading, setLoading] = useState(false);
