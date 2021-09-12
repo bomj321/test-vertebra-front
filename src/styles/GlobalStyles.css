@@ -8,7 +8,11 @@
     margin-top: 1rem;
 }
 
-
+.bold
+{
+    
+    font-weight: bold;
+}
 
 ::-webkit-scrollbar {
     display: none;

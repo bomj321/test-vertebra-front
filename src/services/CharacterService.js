@@ -2,7 +2,7 @@ import axios from 'axios';
 import environment from '../libs/environment';
 
 export default {
-  getCharacters: (number = 1, size = 6) =>
+  getCharacters: (number = 1, size = 10) =>
     axios({
       method: 'GET',
       url: `${environment.baseUrl}/characters/?page=${number}&limit=${size}`,

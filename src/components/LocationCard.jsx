@@ -1,10 +1,17 @@
 import React from 'react';
 import { Card } from 'antd';
 
-const LocationCard = () => {
+const LocationCard = ({ item }) => {
   return (
-    <Card title="Card title" bordered={false}>
-      Card content
+    <Card title={item.name} bordered={false}>
+      <p>
+        Dimensión:
+        <span className="bold"> {item.dimension}</span>
+      </p>
+      <p>
+        Tipo:
+        <span className="bold"> {item.type}</span>
+      </p>
     </Card>
   );
 };

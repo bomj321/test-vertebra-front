@@ -17,9 +17,9 @@ const Character = () => {
   const [items, setItems] = useState([]);
   const [totalItems, setTotalItems] = useState();
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(6);
+  const [pageSize, setPageSize] = useState(10);
 
-  const getCharacters = (pageNumber = 1, pageSizeNumber = 6) => {
+  const getCharacters = (pageNumber = 1, pageSizeNumber = 10) => {
     setLoading(true);
     CharacterService.getCharacters(pageNumber, pageSizeNumber)
       .then((response) => {
@@ -51,7 +51,14 @@ const Character = () => {
         <>
           <Row gutter={16} justify="space-between" align="middle">
             {items.map((item) => (
-              <Col className="gutter-row" span={8} key={item.id}>
+              <Col
+                className="gutter-row"
+                xs={{ span: 24 }}
+                sm={{ span: 12 }}
+                md={{ span: 8 }}
+                lg={{ span: 8 }}
+                key={item.id}
+              >
                 <div style={style}>
                   <CharacterCard item={item} />
                 </div>
