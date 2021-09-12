@@ -2,10 +2,12 @@ import axios from 'axios';
 import environment from '../libs/environment';
 
 export default {
-  getCharacters: (number = 1, size = 10) =>
+  getCharacters: (number = 1, size = 10, name = null) =>
     axios({
       method: 'GET',
-      url: `${environment.baseUrl}/characters/?page=${number}&limit=${size}`,
+      url: `${environment.baseUrl}/characters/?page=${number}&limit=${size}${
+        name ? `&name=${name}` : ''
+      }`,
     }),
 
   saveCharacter: (data) =>

@@ -28,7 +28,7 @@ const Character = () => {
         setLoading(false);
       })
       .catch(() => {
-        toastr.error('Hubo un error al obtener los contactos.');
+        toastr.error('Hubo un error al obtener los personajes.');
         setLoading(false);
       });
   };

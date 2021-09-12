@@ -8,6 +8,12 @@ export default {
       url: `${environment.baseUrl}/episodes/?page=${number}&limit=${size}`,
     }),
 
+  getEpisode: (id) =>
+    axios({
+      method: 'GET',
+      url: `${environment.baseUrl}/episodes/${id}`,
+    }),
+
   saveEpisode: (data) =>
     axios({
       method: 'POST',

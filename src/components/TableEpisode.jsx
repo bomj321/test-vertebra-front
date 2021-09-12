@@ -9,13 +9,16 @@ import Spinner from './Spinner';
 
 // Services
 import EpisodeService from '../services/EpisodeService';
+import LocationService from '../services/LocationService';
+import CharacterService from '../services/CharacterService';
 
 const TableEpisode = () => {
   const [loading, setLoading] = useState(false);
   const [totalItems, setTotalItems] = useState();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-
+  const [items, setItems] = useState([]);
+  const [itemsCharacters, setItemsCharacters] = useState([]);
   const [dataSource, setDataSource] = useState([]);
   const [columns] = useState([
     {
@@ -33,7 +36,12 @@ const TableEpisode = () => {
               className="mr-1"
               onClick={() => deleteEpisode(data.id)}
             />
-            <EpisodeDialog type="edit" />
+            <EpisodeDialog
+              type="edit"
+              idEpisode={data.id}
+              items={items}
+              itemsCharacters={itemsCharacters}
+            />
           </>
         );
       },
@@ -86,17 +94,51 @@ const TableEpisode = () => {
       });
   };
 
+  const getLocations = (pageNumber = 1, pageSizeNumber = 10) => {
+    setLoading(true);
+    LocationService.getLocations(pageNumber, pageSizeNumber)
+      .then((response) => {
+        setItems(response.data.items);
+        setLoading(false);
+      })
+      .catch(() => {
+        toastr.error('Hubo un error al obtener los lugares.');
+        setLoading(false);
+      });
+  };
+
+  const getCharacters = (pageNumber = 1, pageSizeNumber = 10) => {
+    setLoading(true);
+    CharacterService.getCharacters(pageNumber, pageSizeNumber)
+      .then((response) => {
+        setItemsCharacters(response.data.items);
+        setLoading(false);
+      })
+      .catch(() => {
+        toastr.error('Hubo un error al obtener los personajes.');
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
     getEpisodes(page);
+    getLocations(1, 200);
+    getCharacters(1, 700);
   }, []);
 
   return (
     <>
-      <EpisodeDialog />
-
       {loading && <Spinner />}
 
-      {!loading && (
+      {!loading && items.length > 0 && itemsCharacters.length > 0 && (
+        <EpisodeDialog
+          getEpisodes={() => getEpisodes(page)}
+          items={items}
+          itemsCharacters={itemsCharacters}
+        />
+      )}
+
+      {!loading && items.length > 0 && itemsCharacters.length > 0 && (
         <Table
           className="mt-1"
           dataSource={dataSource}
