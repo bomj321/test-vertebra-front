@@ -5,9 +5,7 @@ import toastr from 'toastr';
 import 'toastr/build/toastr.min.css';
 // Services
 import EpisodeService from '../../services/EpisodeService';
-
 import Spinner from '../Spinner';
-
 import { getCharactersId } from '../../libs/utils';
 
 const { Option } = Select;
@@ -21,7 +19,6 @@ const EpisodeDialog = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [episode, setEpisode] = useState(false);
-
   const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
