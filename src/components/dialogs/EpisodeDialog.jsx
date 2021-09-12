@@ -56,6 +56,7 @@ const EpisodeDialog = ({
         .then(async () => {
           toastr.success('Episodio editado con éxito.');
           setLoading(false);
+          getEpisodes();
           handleCancel();
         })
         .catch((error) => {
@@ -72,10 +73,9 @@ const EpisodeDialog = ({
       EpisodeService.saveEpisode(values)
         .then(async () => {
           toastr.success('Episodio guardado con éxito.');
-
           setLoading(false);
-          handleCancel();
           getEpisodes();
+          handleCancel();
         })
         .catch((error) => {
           if (error.response && error.response.status === 409) {
@@ -85,7 +85,6 @@ const EpisodeDialog = ({
               'Ha ocurrido un error al intentar guardar el episodio.'
             );
           }
-
           setLoading(false);
         });
     }

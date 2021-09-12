@@ -65,7 +65,7 @@ const Location = () => {
               </Col>
             ))}
           </Row>
-          <Row gutter={16} justify="center" align="middle">
+          <Row gutter={16} justify="center" align="middle" className="mt-1">
             <Col>
               <Pagination
                 total={totalItems}

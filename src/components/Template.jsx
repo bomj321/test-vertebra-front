@@ -6,7 +6,7 @@ import {
   FundProjectionScreenOutlined,
   LogoutOutlined,
 } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import '../styles/components/Template.css';
 
@@ -18,24 +18,40 @@ const logout = () => {
 };
 
 const Template = ({ children }) => {
+  const location = useLocation();
   return (
     <Layout>
       <Header className="header">
         <div className="logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          className="header-menu-template"
-          defaultSelectedKeys={['1']}
-        >
-          <Menu.Item key="1" icon={<UserOutlined />}>
+        <Menu theme="dark" mode="horizontal" className="header-menu-template">
+          <Menu.Item
+            key="1"
+            icon={<UserOutlined />}
+            className={
+              location.pathname === '/characters'
+                ? 'ant-menu-item-selected'
+                : ''
+            }
+          >
             <Link to="/characters">Personajes</Link>
           </Menu.Item>
-          <Menu.Item key="2" icon={<AreaChartOutlined />}>
+          <Menu.Item
+            key="2"
+            icon={<AreaChartOutlined />}
+            className={
+              location.pathname === '/locations' ? 'ant-menu-item-selected' : ''
+            }
+          >
             <Link to="/locations">Lugares</Link>
           </Menu.Item>
 
-          <Menu.Item key="3" icon={<FundProjectionScreenOutlined />}>
+          <Menu.Item
+            key="3"
+            icon={<FundProjectionScreenOutlined />}
+            className={
+              location.pathname === '/episodes' ? 'ant-menu-item-selected' : ''
+            }
+          >
             <Link to="/episodes">Episodios</Link>
           </Menu.Item>
 

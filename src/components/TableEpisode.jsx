@@ -135,6 +135,7 @@ const TableEpisode = () => {
                   />
                   <EpisodeDialog
                     type="edit"
+                    getEpisodes={() => getEpisodes(page)}
                     idEpisode={data.id}
                     items={items}
                     itemsCharacters={itemsCharacters}

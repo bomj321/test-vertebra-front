@@ -16,7 +16,6 @@ const FormLogin = (props) => {
         if (response) {
           props.setToken(response.data.access_token);
           window.location.href = '/characters';
-          setLoading(false);
         } else {
           setLoading(false);
         }
