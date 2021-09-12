@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react';
-import toastr from 'toastr';
+import React from 'react';
 import 'toastr/build/toastr.min.css';
 import 'antd/dist/antd.css';
 
 import TableEpisode from '../components/TableEpisode';
 
 const Episode = () => {
-  useEffect(() => {
-    toastr.error('El título de beneficio es requerido.');
-  }, []);
-
   return <TableEpisode />;
 };
 

@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
+import { EditOutlined, PlusOutlined } from '@ant-design/icons';
+
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
 
 const EpisodeDialog = ({ type }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -17,18 +20,23 @@ const EpisodeDialog = ({ type }) => {
     setIsModalVisible(false);
   };
 
+  useEffect(() => {
+    //toastr.error('El título de beneficio es requerido.');
+  }, []);
+
   return (
     <>
       {type === 'edit' ? (
         <EditOutlined onClick={showModal} />
       ) : (
         <Button type="primary" onClick={showModal}>
-          Open Modal
+          <PlusOutlined />
+          Episodio
         </Button>
       )}
 
       <Modal
-        title="Basic Modal"
+        title={type === 'edit' ? 'Edición de episodio' : 'Creación de episodio'}
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
