@@ -1,37 +1,38 @@
 import React from 'react';
 import { Table } from 'antd';
+import { DeleteOutlined, AreaChartOutlined } from '@ant-design/icons';
 
 const TableEpisode = () => {
   const dataSource = [
     {
       key: '1',
       name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
+      actions: 32,
     },
     {
       key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
+      name: 'Mike',
+      actions: 32,
     },
   ];
 
   const columns = [
     {
-      title: 'Name',
+      title: 'Nombre',
       dataIndex: 'name',
-      key: 'name',
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: 'Acciones',
+      dataIndex: '',
+      key: 'x',
+      render: () => {
+        return (
+          <>
+            <DeleteOutlined />
+            <AreaChartOutlined />
+          </>
+        );
+      },
     },
   ];
 
@@ -44,7 +45,7 @@ const TableEpisode = () => {
       dataSource={dataSource}
       columns={columns}
       onChange={onChange}
-      pagination={{ pageSize: 1 }}
+      pagination={{ pageSize: 5 }}
     />
   );
 };
