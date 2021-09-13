@@ -46,12 +46,6 @@ const TableEpisode = () => {
       });
   };
 
-  const getPaginatedRows = (pageNumber, pageSizeNumber) => {
-    setPage(pageNumber);
-    setPageSize(pageSizeNumber);
-    getEpisodes(pageNumber, pageSizeNumber);
-  };
-
   const deleteEpisode = (id) => {
     setLoading(true);
     EpisodeService.deleteEpisode(id)
@@ -95,6 +89,12 @@ const TableEpisode = () => {
         toastr.error('Hubo un error al obtener los personajes.');
         setLoading(false);
       });
+  };
+
+  const getPaginatedRows = (pageNumber, pageSizeNumber) => {
+    setPage(pageNumber);
+    setPageSize(pageSizeNumber);
+    getEpisodes(pageNumber, pageSizeNumber);
   };
 
   useEffect(() => {

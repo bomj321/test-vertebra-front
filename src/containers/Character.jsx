@@ -6,6 +6,7 @@ import toastr from 'toastr';
 
 import CharacterCard from '../components/CharacterCard';
 import Spinner from '../components/Spinner';
+import NotRegisters from '../components/NotRegisters';
 
 // Services
 import CharacterService from '../services/CharacterService';
@@ -47,7 +48,7 @@ const Character = () => {
     <>
       {loading && <Spinner />}
 
-      {!loading && (
+      {!loading && items.length > 0 ? (
         <>
           <Row gutter={16} justify="space-between" align="middle">
             {items.map((item) => (
@@ -76,6 +77,8 @@ const Character = () => {
             </Col>
           </Row>
         </>
+      ) : (
+        <NotRegisters />
       )}
     </>
   );

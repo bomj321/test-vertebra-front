@@ -6,6 +6,7 @@ import toastr from 'toastr';
 
 import LocationCard from '../components/LocationCard';
 import Spinner from '../components/Spinner';
+import NotRegisters from '../components/NotRegisters';
 
 // Services
 import LocationService from '../services/LocationService';
@@ -47,7 +48,7 @@ const Location = () => {
     <>
       {loading && <Spinner />}
 
-      {!loading && (
+      {!loading && items.length > 0 ? (
         <>
           <Row gutter={16} justify="space-between" align="middle">
             {items.map((item) => (
@@ -76,6 +77,8 @@ const Location = () => {
             </Col>
           </Row>
         </>
+      ) : (
+        <NotRegisters />
       )}
     </>
   );
