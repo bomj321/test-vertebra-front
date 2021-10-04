@@ -91,10 +91,10 @@ const TableEpisode = () => {
       });
   };
 
-  const getPaginatedRows = (pageNumber, pageSizeNumber) => {
-    setPage(pageNumber);
-    setPageSize(pageSizeNumber);
-    getEpisodes(pageNumber, pageSizeNumber);
+  const getPaginatedRows = (pageNumber) => {
+    setPage(pageNumber.current);
+    setPageSize(pageNumber.pageSize);
+    getEpisodes(pageNumber.current, pageNumber.pageSize);
   };
 
   useEffect(() => {
